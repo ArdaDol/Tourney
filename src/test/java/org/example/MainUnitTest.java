@@ -40,10 +40,10 @@ public class MainUnitTest {
         //this takes the place of the current card
         Tourney tourney = new Tourney(new Card(1, colors[1],5));
 
-         tourney.playGame(player1, true);
+         tourney.playGame(player1, false);
 
 
-        assertEquals(tourney.playersOut.get(o), player1);
+        assertEquals(tourney.playersOut.get(0), player1);
 
 
 

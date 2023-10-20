@@ -1,6 +1,7 @@
 package org.example;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Tourney {
@@ -13,10 +14,10 @@ public class Tourney {
 
     private int pick; // players pick
     private Player  loser;
-    private ArrayList<Player> players, playersOut;
+    public ArrayList<Player> players, playersOut;
 
 
-    public Tourney(Player player1,Player player2, Player player3, int health) {
+    public Tourney(Card card) {
         /*constructor
          * constructs the game
          * prepares the game to play
@@ -29,9 +30,9 @@ public class Tourney {
         choice = new Scanner(System.in);
 
         this.players = new ArrayList<Player>();
-        this.players.add(player1);
-        this.players.add(player2);
-        this.players.add(player3);
+       // this.players.add(player1);
+     //   this.players.add(player2);
+       // this.players.add(player3);
         /*
         for (int i = 0; i < players.size(); i++) {
             this.players.add(new Player(players.get(i), health));
@@ -57,9 +58,9 @@ public class Tourney {
     }
     public void game() {
 
-        playGame(players.get(0),true);
-        playGame(players.get(1), false);
-        playGame(players.get(2),false);
+      //  playGame(players.get(0),true);
+     //   playGame(players.get(1), false);
+     //   playGame(players.get(2),false);
 
         /*
         for(int j =0;j<12;j++) {
@@ -89,11 +90,21 @@ public class Tourney {
 
             if(!con && !hasColor(p) && !hasSpecial(p)){
                 System.out.print("You don't have a valid card. Discard a card");
-                pick = choice.nextInt()-1;
+              //  pick = choice.nextInt()-1;
+                Random random = new Random();
+
+                // nextInt(15) generates a number between 0 (inclusive) and 15 (exclusive)
+                // So, we add 1 to shift the range to 1-15 inclusive.
+                pick = random.nextInt(p.PlayerCards().size()-1) ;
+
+
+
                 if(pick > p.PlayerCards().size()){
                     pick =0;
                     System.out.print("Bad Pick. Discarding the First Card.");
                 }
+                playersOut.add(p);
+                //players.remove(p);
                 p.suffer(5);
                 p.throwCard(pick);
             }
