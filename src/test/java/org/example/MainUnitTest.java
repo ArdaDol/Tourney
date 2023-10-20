@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class MainUnitTest {
 
     @Test
-   //DisplayName("U-Test 007:Test to see if the right cards are checked for second player")
+   //DisplayName("U-Test 009:Test to see if player can play a card part 1")
     void TestToString(){
         Player player1 = new Player("Player 1", 50);
         player1.pickCards(new Card(0,"Alch",0));
@@ -24,7 +24,7 @@ public class MainUnitTest {
 
 
 
-       // assertEquals(Tourney.isValidChoice(player1, 0, false), true);
+       assertEquals(Tourney.hasColor(player1), false);
 
 
 

@@ -67,17 +67,49 @@ public class Tourney {
 			 this method contains entire process for the game.
 		*/
 
-
+            if(!con && !hasColor(p) && !hasSpecial(p)){
+                System.out.print("You don't have a valid card. Discard a card");
+                pick = choice.nextInt()-1;
+                if(pick > p.PlayerCards().size()){
+                    pick =0;
+                    System.out.print("Bad Pick. DIscarding the First Card.");
+                }
+                p.suffer(5);
+                p.throwCard(pick);
+            }
 
             pick = choice.nextInt() - 1;
             while (!isValidChoice(p, pick, con)) {
-
+                System.out.println("Pick a valid number!");
             }
             current = p.throwCard(pick);
             cardpile.add(current);
 
 
 
+    }
+    public static boolean hasColor(Player p) {
+        /*
+         * checks if player has card of the same color as the current card that is being played
+         */
+
+
+        return false;
+    }
+
+    private boolean hasSpecial(Player p) {
+        // TODO Auto-generated method stub
+
+        for(Card c:p.PlayerCards()) {
+
+            if(c.isSpecial()) {
+                return true;
+            }
+
+        }
+
+
+        return false;
     }
     public  boolean isValidChoice(Player p,int choice, boolean con) {
 
