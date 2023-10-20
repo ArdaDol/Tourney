@@ -113,7 +113,15 @@ public class Deck {
     }
 
     public boolean addCard(int value, String colour, int  damage){
-
+        String[] colours = {"Swrd","Arrw","Decp","Sorc", "Merl", "Appr", "Alch"};
+        for(int i=0; i<colours.length;i++) {
+            if (colour == colours[i]){
+                if(value<=15 && value >=0){
+                    deck.add(new Card(value, colour, damage));
+                    return true;
+                }
+            }
+        }
        return false;
 
     }
