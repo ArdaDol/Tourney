@@ -122,7 +122,27 @@ public class Player {
 
     public String hideCards() {
 
-        return "___";
+
+        /*
+         * to hide player cards
+         *
+         */
+
+        String[] card = {" ----- ","|     |","|     |"," ----- "};
+        String c = "";
+
+
+        for(int i=0;i<card.length;i++) {
+
+            for(int j=0;j<playercards.size();j++) {
+
+                c = c + card[i]+" ";
+
+            }
+            c+="\n";
+        }
+
+        return c;
     }
 
 
