@@ -41,6 +41,9 @@ public class Player {
         return playercards.size();
     }
 
+    public int getCards(){
+        return playercards.size();
+    }
     public ArrayList<Card> PlayerCards(){
         /*
          * returns all the cards player has in hand as an ArrayList
