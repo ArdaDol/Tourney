@@ -27,6 +27,7 @@ public class MainUnitTest {
         // Mocking the Scanner to simulate user input
        Player player1 = new Player("Player 1", 50);
        Player player2 = new Player("Player 2", 50);
+        Player player3 = new Player("Player 3", 50);
 
 
       player1.pickCards(new Card(1, colors[0],5));
@@ -34,16 +35,29 @@ public class MainUnitTest {
         player1.pickCards(new Card(1, colors[3],5));
         player1.pickCards(new Card(1, colors[3],5));
 
+        player2.pickCards(new Card(1, colors[0],5));
+        player2.pickCards(new Card(1, colors[2],5));
+        player2.pickCards(new Card(1, colors[3],5));
+        player2.pickCards(new Card(1, colors[3],5));
+
+        player3.pickCards(new Card(2, colors[0],5));
+        player3.pickCards(new Card(1, colors[2],5));
+        player3.pickCards(new Card(1, colors[3],5));
+        player3.pickCards(new Card(1, colors[3],5));
+
 
 
 
         //this takes the place of the current card
-        Tourney tourney = new Tourney(new Card(1, colors[1],5));
+        Tourney tourney = new Tourney();
 
-         tourney.playGame(player1, false);
+         tourney.playGame(player1, false, 0);
+        tourney.playGame(player1, false, 0);
+        tourney.playGame(player1, false, 0);
 
+        tourney.findLoser();
 
-        assertEquals(tourney.playersOut.get(0), player1);
+        assertEquals(tourney.loser, player3);
 
 
 
