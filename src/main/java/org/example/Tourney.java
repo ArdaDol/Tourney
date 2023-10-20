@@ -341,13 +341,19 @@ public class Tourney {
             //add for special
 
             if(p.PlayerCards().get(choice).isExtraSpecial()){
-
+                int counter=0;
                 for(int i =0; i<p.PlayerCards().size();i++){
-                    if(!p.PlayerCards().get(i).isExtraSpecial()){
-                        return false;
+                    if(!p.PlayerCards().get(i).isExtraSpecial() && !p.PlayerCards().get(i).isSpecial() && !p.PlayerCards().get(i).getColor().equals(current.getColor()) ){
+                        counter++;
+                    }else if(p.PlayerCards().get(i).isExtraSpecial()){
+                        counter++;
                     }
                 }
-                return true;
+                if(counter == p.PlayerCards().size()) {
+                    return true;
+                }else{
+                    return false;
+                }
             }
             if(con==false){
                 if(p.PlayerCards().get(choice).getColor().equals(current.getColor()) || p.PlayerCards().get(choice).isSpecial()) {
