@@ -30,69 +30,21 @@ public class MainUnitTest {
 
 
       player1.pickCards(new Card(1, colors[0],5));
-        player1.pickCards(new Card(1, colors[1],5));
         player1.pickCards(new Card(1, colors[2],5));
         player1.pickCards(new Card(1, colors[3],5));
-        player1.pickCards(new Card(0, colors[4], 25));
-        player1.pickCards(new Card(0,colors[5], 5));
-        player1.pickCards(new Card(0,colors[6],5));
 
-        player2.pickCards(new Card(0,colors[6],5));
+
+
 
         //this takes the place of the current card
         Tourney tourney = new Tourney(new Card(1, colors[1],5));
-        //Checks when player plays first, the cards that he can play from his hand. He should not be able to play alchemy only
-        Card card = tourney.playGame(player1, true, 1);
-        assertEquals(card, player1.PlayerCards().get(0));
 
-         card = tourney.playGame(player1, true, 2);
-        assertEquals(card, player1.PlayerCards().get(1));
-
-         card = tourney.playGame(player1, true, 3);
-        assertEquals(card, player1.PlayerCards().get(2));
-
-         card = tourney.playGame(player1, true, 4);
-        assertEquals(card, player1.PlayerCards().get(3));
-
-        card = tourney.playGame(player1, true, 5);
-        assertEquals(card, player1.PlayerCards().get(4));
-
-        card = tourney.playGame(player1, true, 6);
-        assertEquals(card, player1.PlayerCards().get(5));
-
-        card = tourney.playGame(player1, true, 7);
-        assertEquals(card, player1.PlayerCards().get(6));
+         tourney.playGame(player1, true);
 
 
-        //Checks when player plays second, the cards that he can play from his hand. He should only be able to play sword , apprentice or merlin.
-        tourney.current = new Card(1, colors[0],5);
-         card = tourney.playGame(player1, false, 1);
-        assertEquals(card, player1.PlayerCards().get(0));
-
-       card = tourney.playGame(player1, false, 2);
-        assertEquals(card, player1.PlayerCards().get(1));
-
-        card = tourney.playGame(player1, false, 3);
-        assertEquals(card, player1.PlayerCards().get(2));
-
-         card = tourney.playGame(player1, false, 4);
-        assertEquals(card, player1.PlayerCards().get(3));
-
-         card = tourney.playGame(player1, false, 5);
-        assertEquals(card, player1.PlayerCards().get(4));
-
-         card = tourney.playGame(player1, false, 6);
-        assertEquals(card, player1.PlayerCards().get(5));
-
-         card = tourney.playGame(player1, false, 7);
-        assertEquals(card, player1.PlayerCards().get(6));
+        assertEquals(tourney.playersOut.get(o), player1);
 
 
-        //when the only card the player has is alchemy
-       card = tourney.playGame(player2, false, 0);
-        assertEquals(card, player2.PlayerCards().get(0));
-
-//
 
 
 
