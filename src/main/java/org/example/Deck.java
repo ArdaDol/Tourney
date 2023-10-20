@@ -153,8 +153,7 @@ public class Deck {
         /*
          * gets the topmost card from a inverted deck
          */
-        Card card = new Card(1, "Test", 0);
-       return card;
+        return deck.remove(deck.size()-1);
     }
 
     public Card peek() {
