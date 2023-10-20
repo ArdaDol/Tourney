@@ -86,7 +86,29 @@ public class Tourney {
             Card card = p.throwCard(pick);
 
 
-
+        if (card.isSpecial()) {
+            System.out.println("Specify the value of the card: ");
+            int value = choice.nextInt();
+            if(value>  p.PlayerCards().size()){
+                System.out.print("Bad Choice. Value is set to 1");
+                value = 1;
+            }
+            if(current.getColor()!= "N") {
+                card.modify(value, current.getColor());
+            }else{
+                System.out.println("Pick Between: \n Sword(1)  Arrow(2)   Sorrcery(3)  Deception(4)");
+                int c = choice.nextInt();
+                    if(c==1){
+                        card.modify(value, "Swrd");
+                    }else if(c==2){
+                        card.modify(value, "Arrw");
+                    }else if(c==3){
+                        card.modify(value, "Sorc");
+                    }else {
+                        card.modify(value, "Decp");
+                    }
+                }
+            }
         current = card;
         cardpile.add(current);
         }
