@@ -124,6 +124,9 @@ public class Deck {
        return false;
 
     }
+    public void addCard(Card card){
+        deck.add(card);
+    }
 
     public boolean isEmpty() { //is deck empty?
         /*
@@ -150,7 +153,8 @@ public class Deck {
         /*
          * gets the topmost card from a inverted deck
          */
-        return deck.remove(deck.size()-1);
+        Card card = new Card(1, "Test", 0);
+       return card;
     }
 
     public Card peek() {
