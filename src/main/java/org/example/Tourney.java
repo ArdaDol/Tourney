@@ -39,7 +39,15 @@ public class Tourney {
     }
 
     private void distributecards() {
+        for (int j = 0; j < players.size(); j++) {
+            for (int i = 0; i < 12; i++) {
 
+
+                players.get(j).pickCards(deck.getTopCard());
+
+
+            }
+        }
 
     }
 }
