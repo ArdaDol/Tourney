@@ -79,7 +79,7 @@ public class Tourney {
 
 
     }
-    public static boolean isValidChoice(Player p,int choice, boolean con) {
+    public  boolean isValidChoice(Player p,int choice, boolean con) {
 
         /*
          * checks if the user selection was a valid choice or not
@@ -98,7 +98,12 @@ public class Tourney {
                 }
                 return true;
             }
+            if(!con){
+                if(p.PlayerCards().get(choice).getColor().equals(current.getColor()) || p.PlayerCards().get(choice).isSpecial()) {
+                    return true;
+                }
 
+            }
 
 
 
