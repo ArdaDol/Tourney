@@ -32,6 +32,7 @@ public class MainUnitTest {
       player1.pickCards(new Card(1, colors[0],5));
         player1.pickCards(new Card(1, colors[2],5));
         player1.pickCards(new Card(1, colors[3],5));
+        player1.pickCards(new Card(1, colors[3],5));
 
 
 
