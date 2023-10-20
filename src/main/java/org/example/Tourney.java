@@ -39,7 +39,7 @@ public class Tourney {
         }*/
 
 
-      //  distributecards();
+        distributecards();
 
 
     }
@@ -56,85 +56,133 @@ public class Tourney {
         }
 
     }
-    public void game() {
+    public void game( int rounds, int health) {
 
+        System.out.println("How Many Players? (3-6)");
+        pick = choice.nextInt();
+        while(pick<3 && pick>6){
+            System.out.println("How Many Players? (3-6)");
+            pick = choice.nextInt();
+        }
+        for(int i=0;i<pick;i++){
+            System.out.println("Enter Player "+i+"'s Name: ");
+            String name = choice.next();
+            players.add(new Player(name, health));
+        }
 
-        String[] colors = {"Swrd","Arrw","Decp","Sorc", "Merl", "Appr", "Alch"};
-        // Mocking the Scanner to simulate user input
-        Player player1 = new Player("Player 1", 50);
-        Player player2 = new Player("Player 2", 50);
-        Player player3 = new Player("Player 3", 50);
-        Player player4 = new Player("Player 4", 50);
+        for(int k=0; k<rounds;k++) {
+            distributecards();
+            for (int j = 0; j < 12; j++) {
+                System.out.println("Round " + j + "!");
+                boolean con = true;
+                playGame(this.players.get(0), con);
+                con = false;
+                for (int i = 1; i < players.size(); i++) {
+                    playGame(players.get(i), con);
+                }
+                int loser = findLoser();
+                handleLoser(loser);
+                handleOuts();
 
-        player4.pickCards(new Card(1, colors[3],5));
-        player4.pickCards(new Card(1, colors[3],5));
-        player4.pickCards(new Card(1, colors[3],5));
-
-        player1.pickCards(new Card(1, colors[0],5));
-        player1.pickCards(new Card(1, colors[2],5));
-        player1.pickCards(new Card(1, colors[3],5));
-        player1.pickCards(new Card(1, colors[3],5));
-
-        player2.pickCards(new Card(1, colors[0],5));
-        player2.pickCards(new Card(1, colors[2],5));
-        player2.pickCards(new Card(1, colors[3],5));
-        player2.pickCards(new Card(1, colors[3],5));
-
-        player3.pickCards(new Card(2, colors[0],5));
-        player3.pickCards(new Card(1, colors[2],5));
-        player3.pickCards(new Card(1, colors[3],5));
-        player3.pickCards(new Card(1, colors[3],5));
-
-
-        playGame(player1, true, 0);
-        System.out.println(current.getColor()+ "---"+current.getValue());
-        playGame(player2, false, 0);
-        System.out.println(current.getColor()+ "---"+current.getValue());
-         playGame(player3, false, 0);
-        System.out.println(current.getColor()+ "---"+current.getValue());
-        playGame(player4, false, 0);
-        System.out.println(current.getColor()+ "---"+current.getValue());
-        System.out.println(hasColor(player4)+ "---"+hasSpecial(player4));
-
-
-        //  playGame(players.get(0),true);
-     //   playGame(players.get(1), false);
-     //   playGame(players.get(2),false);
-
-        /*
-        for(int j =0;j<12;j++) {
-            System.out.println("Round "+j+"!");
-            boolean con = true;
-            playGame(players.get(0), con, 0);
-            con = false;
-            for (int i = 1; i < players.size(); i++) {
-                playGame(players.get(i), con, i);
             }
-            findLoser();
-            if(!playersOut.isEmpty()) {
-                players.addAll(playersOut);
-                playersOut.clear();
+            cardpile.clear();
+            current = new Card(0,"N",0);
+            SubtractPoints();
+            DisplayPoints();
+            KickPlayers();
+            if(players.size() <=1){
+                System.out.println("Not Enough Players To Play");
+                break;
             }
-        }*/
 
-
+        }
 
 
     }
 
-    public void playGame(Player p, boolean con, int pick) {
+    private void KickPlayers(){
+           ArrayList<Player> kickedPlayers = new ArrayList<Player>();
+            for (int i = 0; i < players.size(); i++) {
+                if (players.get(i).getHealth() <= 0) {
+                    System.out.println(players.get(i).toString() + " Has Lost!");
+                    kickedPlayers.add(players.get(i));
+                }
+            }
+            for(int i = 0; i < kickedPlayers.size(); i++){
+                for(int j=0; j<players.size();j++){
+                    if(players.get(j)==players.get(i)){
+                        players.remove(j);
+                        break;
+                    }
+                }
+            }
+
+    }
+    private void SubtractPoints(){
+        int winner = players.get(0).getHealth();
+        for(int i=0;i<players.size();i++){
+            for(int j = 0;j<players.get(i).LostCards().size();j++){
+                players.get(i).suffer(players.get(i).LostCards().get(j).getDamage());
+                deck.addCard(players.get(i).LostCards().get(j));
+
+
+            }
+            players.get(i).clearLostCards();
+
+        }
+    }
+    private void DisplayPoints(){
+       int winner = players.get(0).getHealth();
+       Player win = players.get(0);
+        for(int i=0;i<players.size();i++){
+            System.out.println(players.get(i).toString()+ " Has "+ players.get(i).getHealth() );
+            if(players.get(i).getHealth()>winner){
+                winner = players.get(i).getHealth();
+                win = players.get(i);
+            }
+        }
+        System.out.println("Winner of This Round is: "+ win.toString());
+    }
+    private void handleOuts(){
+        if(!playersOut.isEmpty()){
+            players.addAll(playersOut);
+            playersOut.clear();
+        }
+    }
+    private void handleLoser(int num){
+        if(num>=0){
+            Player loser = players.get(num);
+            players.remove(num);
+            for (int i = 0; i < cardpile.size(); i++) {
+                loser.addLost(cardpile.get(i));
+            }
+
+            players.add(0, loser);
+            System.out.println("LOSER IS: " + loser.toString());
+        }
+    }
+
+    public void playGame(Player p, boolean con) {
 		/*	 this method takes player that is currently playing as an argument.
 			 this method contains entire process for the game.
 		*/
-        Random random = new Random();
+        //Random random = new Random();
+        decorate();
+        System.out.println(p+", It is your turn: ");
+
+        decorate();
+        showBoard(p);
+        decorate();
+        System.out.println("Please pick a card:");
+
             if((!con) && !hasColor(p) && !hasSpecial(p)){
                 System.out.print("You don't have a valid card. Discard a card");
-              //  pick = choice.nextInt()-1;
+                pick = choice.nextInt()-1;
 
 
                 // nextInt(15) generates a number between 0 (inclusive) and 15 (exclusive)
                 // So, we add 1 to shift the range to 1-15 inclusive.
-                pick = random.nextInt(p.PlayerCards().size()-1) ;
+               // pick = random.nextInt(p.PlayerCards().size()-1) ;
 
 
 
@@ -143,25 +191,28 @@ public class Tourney {
                     System.out.print("Bad Pick. Discarding the First Card.");
                 }
                 playersOut.add(p);
-                //players.remove(p);
+                players.remove(p);
                 p.suffer(5);
                 p.throwCard(pick);
 
             } else {
-
-            //  pick = choice.nextInt() - 1;
+                if(current.getColor()!= "N") {
+                    System.out.println(p + "The current card on play is:\n" + current);
+                }
+                pick = choice.nextInt() - 1;
 
             while (!isValidChoice(p, pick, con)) {
                 System.out.println("Pick a valid number!");
-                pick = random.nextInt(p.PlayerCards().size() - 1);
+                pick = choice.nextInt() - 1;
+                //pick = random.nextInt(p.PlayerCards().size() - 1);
             }
             Card card = p.throwCard(pick);
 
 
             if (card.isSpecial()) {
                 System.out.println("Specify the value of the card: ");
-                // int value = choice.nextInt();
-                int value = random.nextInt(15) + 1;
+                 int value = choice.nextInt();
+               // int value = random.nextInt(15) + 1;
                 if (value > p.PlayerCards().size()) {
                     System.out.print("Bad Choice. Value is set to 1");
                     value = 1;
@@ -170,8 +221,8 @@ public class Tourney {
                     card.modify(value, current.getColor());
                 } else {
                     System.out.println("Pick Between: \n Sword(1)  Arrow(2)   Sorrcery(3)  Deception(4)");
-                    //int c = choice.nextInt();
-                    int c = random.nextInt(4) + 1;
+                    int c = choice.nextInt();
+                   // int c = random.nextInt(4) + 1;
                     if (c == 1) {
                         card.modify(value, "Swrd");
                     } else if (c == 2) {
@@ -186,7 +237,7 @@ public class Tourney {
             current = card;
             cardpile.add(current);
         }
-        }
+    }
 
     public int findLoser(){
 
@@ -228,6 +279,16 @@ public class Tourney {
 
         return loser;
 
+
+    }
+
+    public void handleLoser(Player p){
+        for (int i = 0; i < cardpile.size(); i++) {
+            p.addLost(cardpile.get(i));
+        }
+
+        players.add(0, loser);
+        System.out.println("LOSER IS: " + loser.toString());
 
     }
 
@@ -300,6 +361,20 @@ public class Tourney {
         }
 
         return false;
+    }
+
+    private void decorate() {
+        /*
+         * draws asterik lines
+         */
+
+
+        System.out.println("***********************************************************************************");
+    }
+
+    public void showBoard(Player p) {
+        System.out.println(p.toString());
+        p.showCards();
     }
 
 }

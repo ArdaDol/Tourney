@@ -52,7 +52,15 @@ public class Player {
 
         return playercards;
     }
-
+    public void clearLostCards(){
+        loserPile.clear();
+    }
+    public int getHealth(){
+        return health;
+    }
+    public ArrayList<Card> LostCards(){
+        return loserPile;
+    }
     public void addLost(Card c){
         loserPile.add(c);
     }
@@ -77,7 +85,7 @@ public class Player {
 
 
 
-    public String showCards() {
+    public void showCards() {
 
 
 
@@ -120,7 +128,7 @@ public class Player {
 
         }
 
-        return c;
+        System.out.println(c);
     }
 
     public String hideCards() {
