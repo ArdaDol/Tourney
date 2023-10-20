@@ -60,7 +60,7 @@ public class Tourney {
 
         System.out.println("How Many Players? (3-6)");
         pick = choice.nextInt();
-        while(pick<3 && pick>6){
+        while(pick<3 && pick<=6){
             System.out.println("How Many Players? (3-6)");
             pick = choice.nextInt();
         }
