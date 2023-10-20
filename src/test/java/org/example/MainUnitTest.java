@@ -8,20 +8,24 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class MainUnitTest {
 
     @Test
-   //DisplayName("U-Test 006:Test to see if cards dealt are 12 for each player and random")
+   //DisplayName("U-Test 007:Test to see if the right cards are checked for first player")
     void TestToString(){
         Player player1 = new Player("Player 1", 50);
-        Player player2 = new Player("Player 2", 50);
-
-       Tourney tourney = new Tourney(player1, player2, 50);
-
-
+        player1.pickCards(new Card(0,"Alch",0));
+        player1.pickCards(new Card(0,"Alch",0));
+        player1.pickCards(new Card(0,"Alch",0));
 
 
+        Tourney.isValidChoice(player1, 0);
 
 
-        assertEquals(player1.getCards(), 12);
-        assertEquals(player2.getCards(), 12);
+
+
+
+
+
+        assertEquals(Tourney.isValidChoice(player1, 0), true);
+
 
 
     }

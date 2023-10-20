@@ -7,6 +7,7 @@ public class Card {
     private int damage;
 
     private boolean special;
+    private boolean extraSpecial;
 
     public Card(int value,String color, int damage) {
 
@@ -23,23 +24,17 @@ public class Card {
         if(value ==0){
             this.special = true;
         }
+        if(color == "Alch"){
+            this.extraSpecial = true;
+        }
 
     }
 
 
-
-    public Card(int specialValue) { // constructor for special cards like +4 and +2
-
-        /*
-         * assigns special value to the card
-         * sets the card to special category
-         */
-
-        this.color="";
-        // this.specialValue = specialValue;
-        this.value = 0;
-        this.special = true;
+    public boolean isExtraSpecial() {
+        return extraSpecial;
     }
+
     public void modify(int value, String color){
         this.value = value;
         this.color = color;

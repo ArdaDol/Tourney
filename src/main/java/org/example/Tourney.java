@@ -15,7 +15,7 @@ public class Tourney {
     private ArrayList<Player> players;
 
 
-    public Tourney(Player player1, Player player2, int health) {
+    public Tourney(ArrayList<String> players, int health) {
         /*constructor
          * constructs the game
          * prepares the game to play
@@ -29,8 +29,9 @@ public class Tourney {
 
         this.players = new ArrayList<Player>();
 
-       players.add(player1);
-       players.add(player2);
+        for (int i = 0; i < players.size(); i++) {
+            this.players.add(new Player(players.get(i), health));
+        }
 
 
         distributecards();
@@ -50,4 +51,40 @@ public class Tourney {
         }
 
     }
+    public void game() {
+			/* this method simulates turns between the two players. when turn is even, player 1 plays and when
+			   turn is odd player 2 plays.
+			*/
+        playGame(new Player("Josh", 50));
+
+
+
+
+    }
+
+    public void playGame(Player p) {
+		/*	 this method takes player that is currently playing as an argument.
+			 this method contains entire process for the game.
+		*/
+
+
+
+            pick = choice.nextInt()-1;
+            isValidChoice(p, pick);
+            current = p.throwCard(pick);
+            cardpile.add(current);
+
+
+    }
+    public static boolean isValidChoice(Player p,int choice) {
+
+        /*
+         * checks if the user selection was a valid choice or not
+         *
+         */
+
+        return false;
+    }
+
 }
+
