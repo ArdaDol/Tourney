@@ -81,13 +81,21 @@ public class Tourney {
             pick = choice.nextInt() - 1;
             while (!isValidChoice(p, pick, con)) {
                 System.out.println("Pick a valid number!");
+                pick = choice.nextInt() - 1;
             }
-            current = p.throwCard(pick);
-            cardpile.add(current);
+            Card card = p.throwCard(pick);
 
 
 
-    }
+        current = card;
+        cardpile.add(current);
+        }
+
+
+
+
+
+
     private boolean hasColor(Player p) {
         /*
          * checks if player has card of the same color as the current card that is being played
