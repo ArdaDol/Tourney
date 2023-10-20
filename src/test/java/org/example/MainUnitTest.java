@@ -34,7 +34,7 @@ public class MainUnitTest {
         player2.pickCards(new Card(1, colors[3],5));
         player2.pickCards(new Card(1, colors[3],5));
 
-        player3.pickCards(new Card(2, colors[0],5));
+        player3.pickCards(new Card(1, colors[0],5));
         player3.pickCards(new Card(1, colors[2],5));
         player3.pickCards(new Card(1, colors[3],5));
         player3.pickCards(new Card(1, colors[3],5));
@@ -51,7 +51,7 @@ public class MainUnitTest {
 
         tourney.findLoser();
 
-        assertEquals( tourney.findLoser(), 3);
+        assertEquals( tourney.findLoser(), -1);
 
 
 
