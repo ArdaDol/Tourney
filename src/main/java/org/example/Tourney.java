@@ -17,16 +17,16 @@ public class Tourney {
     public ArrayList<Player> players, playersOut;
 
 
-    public Tourney(Card card) {
+    public Tourney() {
         /*constructor
          * constructs the game
          * prepares the game to play
          */
         deck = new Deck();
         deck.shuffle();
-
+        current = new Card(0, "N",0);
         cardpile = new ArrayList<Card>();
-
+        playersOut = new ArrayList<Player>();
         choice = new Scanner(System.in);
 
         this.players = new ArrayList<Player>();
@@ -57,8 +57,38 @@ public class Tourney {
 
     }
     public void game() {
+        /*
+        String[] colors = {"Swrd","Arrw","Decp","Sorc", "Merl", "Appr", "Alch"};
+        // Mocking the Scanner to simulate user input
+        Player player1 = new Player("Player 1", 50);
+        Player player2 = new Player("Player 2", 50);
+        Player player3 = new Player("Player 3", 50);
 
-      //  playGame(players.get(0),true);
+
+        player1.pickCards(new Card(1, colors[0],5));
+        player1.pickCards(new Card(1, colors[2],5));
+        player1.pickCards(new Card(1, colors[3],5));
+        player1.pickCards(new Card(1, colors[3],5));
+
+        player2.pickCards(new Card(1, colors[0],5));
+        player2.pickCards(new Card(1, colors[2],5));
+        player2.pickCards(new Card(1, colors[3],5));
+        player2.pickCards(new Card(1, colors[3],5));
+
+        player3.pickCards(new Card(2, colors[0],5));
+        player3.pickCards(new Card(1, colors[2],5));
+        player3.pickCards(new Card(1, colors[3],5));
+        player3.pickCards(new Card(1, colors[3],5));
+
+
+        playGame(player1, true, 0);
+        System.out.println(current.getColor()+ "---"+current.getValue());
+        playGame(player2, false, 0);
+        System.out.println(current.getColor()+ "---"+current.getValue());
+      playGame(player3, false, 0);
+        System.out.println(current.getColor()+ "---"+current.getValue());
+        */
+        //  playGame(players.get(0),true);
      //   playGame(players.get(1), false);
      //   playGame(players.get(2),false);
 
@@ -83,15 +113,15 @@ public class Tourney {
 
     }
 
-    public void playGame(Player p, boolean con) {
+    public void playGame(Player p, boolean con, int pick) {
 		/*	 this method takes player that is currently playing as an argument.
 			 this method contains entire process for the game.
 		*/
-
-            if(!con && !hasColor(p) && !hasSpecial(p)){
+        Random random = new Random();
+            if((con == false) && !hasColor(p) && !hasSpecial(p)){
                 System.out.print("You don't have a valid card. Discard a card");
               //  pick = choice.nextInt()-1;
-                Random random = new Random();
+
 
                 // nextInt(15) generates a number between 0 (inclusive) and 15 (exclusive)
                 // So, we add 1 to shift the range to 1-15 inclusive.
@@ -109,17 +139,19 @@ public class Tourney {
                 p.throwCard(pick);
             }
 
-            pick = choice.nextInt() - 1;
+          //  pick = choice.nextInt() - 1;
+
             while (!isValidChoice(p, pick, con)) {
                 System.out.println("Pick a valid number!");
-                pick = choice.nextInt() - 1;
+                pick = random.nextInt(p.PlayerCards().size()-1);
             }
             Card card = p.throwCard(pick);
 
 
         if (card.isSpecial()) {
             System.out.println("Specify the value of the card: ");
-            int value = choice.nextInt();
+           // int value = choice.nextInt();
+            int value = random.nextInt(15)+1;
             if(value>  p.PlayerCards().size()){
                 System.out.print("Bad Choice. Value is set to 1");
                 value = 1;
@@ -128,7 +160,8 @@ public class Tourney {
                 card.modify(value, current.getColor());
             }else{
                 System.out.println("Pick Between: \n Sword(1)  Arrow(2)   Sorrcery(3)  Deception(4)");
-                int c = choice.nextInt();
+                //int c = choice.nextInt();
+                int c = random.nextInt(4)+1;
                     if(c==1){
                         card.modify(value, "Swrd");
                     }else if(c==2){
@@ -144,11 +177,11 @@ public class Tourney {
         cardpile.add(current);
         }
 
-    private void findLoser(){
+    public int findLoser(){
 
         int[] indexs = new int[cardpile.size()];
-
-        int small = 99;
+        int loser = -1;
+        //int small = 99;
         for(int i=0;i<cardpile.size();i++){
 
             indexs[i]= i+1;
@@ -163,43 +196,18 @@ public class Tourney {
                     indexs[j]=0;
 
 
-                }else{
-                    small = i;
                 }
             }
         }
 
-        for(int i =0;i<indexs.length;i++){
-
+        for(int i=0;i<indexs.length;i++){
             if(indexs[i]!=0){
-                small = i;
+                loser = i+1;
             }
         }
-
-        for(int i =0;i< indexs.length;i++){
-
-            if(indexs[i]!=0){
-                if(cardpile.get(i).getValue()<cardpile.get(small).getValue()){
-                    small = i;
-                }
-            }
-        }
-
-        if(small ==99 ){
-            System.out.println("No Losers This Melee");
-        }else {
-            loser = players.get(small);
+        return loser;
 
 
-            for (int i = 0; i < cardpile.size(); i++) {
-                loser.addLost(cardpile.get(i));
-            }
-
-            cardpile.clear();
-            players.remove(small);
-            players.add(0, loser);
-            System.out.println("LOSER IS: " + loser.toString());
-        }
     }
 
 
@@ -256,11 +264,14 @@ public class Tourney {
                 }
                 return true;
             }
-            if(!con){
+            if(con==false){
                 if(p.PlayerCards().get(choice).getColor().equals(current.getColor()) || p.PlayerCards().get(choice).isSpecial()) {
                     return true;
                 }
 
+            }else{
+
+               return true;
             }
 
 

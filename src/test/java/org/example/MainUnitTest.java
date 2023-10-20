@@ -13,13 +13,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
 public class MainUnitTest {
-    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-    private final PrintStream originalOut = System.out;
 
-    @BeforeEach
-    public void setUpStreams() {
-        System.setOut(new PrintStream(outContent));
-    }
     @Test
    //DisplayName("U-Test 009:Test to see if player can play a card part 2")
     void TestPlayerCards(){
@@ -51,13 +45,13 @@ public class MainUnitTest {
         //this takes the place of the current card
         Tourney tourney = new Tourney();
 
-         tourney.playGame(player1, false, 0);
-        tourney.playGame(player1, false, 0);
-        tourney.playGame(player1, false, 0);
+         tourney.playGame(player1, true, 0);
+        tourney.playGame(player2, false, 0);
+        tourney.playGame(player3, false, 0);
 
         tourney.findLoser();
 
-        assertEquals(tourney.loser, player3);
+        assertEquals( tourney.findLoser(), 3);
 
 
 
