@@ -69,7 +69,58 @@ public class Card {
 
     public String toString() {
 
-     return "TESTING";
+        /*
+         * prints the card.
+         * prints [ color - card value ] if the card is not a special card
+         * prints [ + value ] if it is a special card
+         */
+
+//		if(!special) {
+//			return "[ "+this.color+"-"+this.value+" ]";
+//		}
+//
+//		else if(special){
+//
+//			return "[ "+"+"+this.specialValue+" ]";
+//		}
+//		return null;
+
+        String[] card = {" ----- ","|     |","|     |"," ----- "};
+        String c = "";
+
+
+        for(int i=0;i<card.length;i++) {
+
+            for(int j=0;j<1;j++) {
+
+                if(i==1) {
+
+                    c = c +"| "+this.getColor()+" |"+" ";
+
+                }
+
+                else if(i==2) {
+
+                    c = c + "|  "+this.getValue()+"  |"+" ";
+                }
+
+                else {
+                    c = c + card[i]+" ";
+                }
+
+
+
+            }
+
+            c +="\n";
+
+        }
+
+
+
+
+        return c;
+
 
 
 
