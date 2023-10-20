@@ -55,15 +55,51 @@ public class MainUnitTest {
         tourney.playGame(player3, false, 0);
 
 
-        tourney.findLoser();
+
 
         assertEquals( tourney.findLoser(), 0);
 
 
+        Player player01 = new Player("Player 1", 50);
+        Player player02 = new Player("Player 2", 50);
+        Player player03 = new Player("Player 3", 50);
+        Player player04 = new Player("Player 4", 50);
+
+
+        player01.pickCards(new Card(0, colors[4],5));
+        player01.pickCards(new Card(1, colors[2],5));
+        player01.pickCards(new Card(1, colors[2],5));
+        player01.pickCards(new Card(1, colors[3],5));
+
+        player02.pickCards(new Card(0, colors[6],5));
+        player02.pickCards(new Card(0, colors[6],5));
+        player02.pickCards(new Card(0, colors[6],5));
+        player02.pickCards(new Card(0, colors[6],5));
+
+        player03.pickCards(new Card(0, colors[5],5));
+        player03.pickCards(new Card(0, colors[5],5));
+        player03.pickCards(new Card(0, colors[5],5));
+        player03.pickCards(new Card(0, colors[5],5));
 
 
 
 
+        player4.pickCards(new Card(1, colors[3],5));
+        player4.pickCards(new Card(10, colors[3],5));
+        player4.pickCards(new Card(1, colors[3],5));
+
+
+        Tourney tourney1 = new Tourney();
+
+        tourney1.playGame(player01, true, 0);
+        tourney1.playGame(player02, false, 0);
+        tourney1.playGame(player04, false, 3);
+        tourney1.playGame(player03, false, 0);
+
+
+
+
+        assertEquals( tourney.findLoser(), 0);
 
 
 
