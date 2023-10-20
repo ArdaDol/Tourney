@@ -22,32 +22,38 @@ public class MainUnitTest {
        Player player1 = new Player("Player 1", 50);
        Player player2 = new Player("Player 2", 50);
         Player player3 = new Player("Player 3", 50);
+        Player player4 = new Player("Player 4", 50);
 
 
       player1.pickCards(new Card(1, colors[0],5));
         player1.pickCards(new Card(1, colors[2],5));
-        player1.pickCards(new Card(1, colors[3],5));
+        player1.pickCards(new Card(1, colors[2],5));
         player1.pickCards(new Card(1, colors[3],5));
 
         player2.pickCards(new Card(3, colors[0],5));
         player2.pickCards(new Card(1, colors[2],5));
-        player2.pickCards(new Card(1, colors[3],5));
-        player2.pickCards(new Card(1, colors[3],5));
+        player2.pickCards(new Card(1, colors[2],5));
+        player2.pickCards(new Card(1, colors[2],5));
 
         player3.pickCards(new Card(4, colors[0],5));
         player3.pickCards(new Card(1, colors[2],5));
-        player3.pickCards(new Card(1, colors[3],5));
-        player3.pickCards(new Card(1, colors[3],5));
+        player3.pickCards(new Card(1, colors[2],5));
+        player3.pickCards(new Card(1, colors[2],5));
 
 
 
 
+        player4.pickCards(new Card(1, colors[3],5));
+        player4.pickCards(new Card(1, colors[3],5));
+        player4.pickCards(new Card(1, colors[3],5));
         //this takes the place of the current card
         Tourney tourney = new Tourney();
 
          tourney.playGame(player1, true, 0);
         tourney.playGame(player2, false, 0);
+        tourney.playGame(player4, false, 3);
         tourney.playGame(player3, false, 0);
+
 
         tourney.findLoser();
 

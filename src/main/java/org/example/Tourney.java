@@ -57,13 +57,18 @@ public class Tourney {
 
     }
     public void game() {
-        /*
+
+
         String[] colors = {"Swrd","Arrw","Decp","Sorc", "Merl", "Appr", "Alch"};
         // Mocking the Scanner to simulate user input
         Player player1 = new Player("Player 1", 50);
         Player player2 = new Player("Player 2", 50);
         Player player3 = new Player("Player 3", 50);
+        Player player4 = new Player("Player 4", 50);
 
+        player4.pickCards(new Card(1, colors[3],5));
+        player4.pickCards(new Card(1, colors[3],5));
+        player4.pickCards(new Card(1, colors[3],5));
 
         player1.pickCards(new Card(1, colors[0],5));
         player1.pickCards(new Card(1, colors[2],5));
@@ -85,9 +90,13 @@ public class Tourney {
         System.out.println(current.getColor()+ "---"+current.getValue());
         playGame(player2, false, 0);
         System.out.println(current.getColor()+ "---"+current.getValue());
-      playGame(player3, false, 0);
+         playGame(player3, false, 0);
         System.out.println(current.getColor()+ "---"+current.getValue());
-        */
+        playGame(player4, false, 0);
+        System.out.println(current.getColor()+ "---"+current.getValue());
+        System.out.println(hasColor(player4)+ "---"+hasSpecial(player4));
+
+
         //  playGame(players.get(0),true);
      //   playGame(players.get(1), false);
      //   playGame(players.get(2),false);
@@ -118,7 +127,7 @@ public class Tourney {
 			 this method contains entire process for the game.
 		*/
         Random random = new Random();
-            if((con == false) && !hasColor(p) && !hasSpecial(p)){
+            if((!con) && !hasColor(p) && !hasSpecial(p)){
                 System.out.print("You don't have a valid card. Discard a card");
               //  pick = choice.nextInt()-1;
 
@@ -137,44 +146,46 @@ public class Tourney {
                 //players.remove(p);
                 p.suffer(5);
                 p.throwCard(pick);
-            }
 
-          //  pick = choice.nextInt() - 1;
+            } else {
+
+            //  pick = choice.nextInt() - 1;
 
             while (!isValidChoice(p, pick, con)) {
                 System.out.println("Pick a valid number!");
-                pick = random.nextInt(p.PlayerCards().size()-1);
+                pick = random.nextInt(p.PlayerCards().size() - 1);
             }
             Card card = p.throwCard(pick);
 
 
-        if (card.isSpecial()) {
-            System.out.println("Specify the value of the card: ");
-           // int value = choice.nextInt();
-            int value = random.nextInt(15)+1;
-            if(value>  p.PlayerCards().size()){
-                System.out.print("Bad Choice. Value is set to 1");
-                value = 1;
-            }
-            if(current.getColor()!= "N") {
-                card.modify(value, current.getColor());
-            }else{
-                System.out.println("Pick Between: \n Sword(1)  Arrow(2)   Sorrcery(3)  Deception(4)");
-                //int c = choice.nextInt();
-                int c = random.nextInt(4)+1;
-                    if(c==1){
+            if (card.isSpecial()) {
+                System.out.println("Specify the value of the card: ");
+                // int value = choice.nextInt();
+                int value = random.nextInt(15) + 1;
+                if (value > p.PlayerCards().size()) {
+                    System.out.print("Bad Choice. Value is set to 1");
+                    value = 1;
+                }
+                if (current.getColor() != "N") {
+                    card.modify(value, current.getColor());
+                } else {
+                    System.out.println("Pick Between: \n Sword(1)  Arrow(2)   Sorrcery(3)  Deception(4)");
+                    //int c = choice.nextInt();
+                    int c = random.nextInt(4) + 1;
+                    if (c == 1) {
                         card.modify(value, "Swrd");
-                    }else if(c==2){
+                    } else if (c == 2) {
                         card.modify(value, "Arrw");
-                    }else if(c==3){
+                    } else if (c == 3) {
                         card.modify(value, "Sorc");
-                    }else {
+                    } else {
                         card.modify(value, "Decp");
                     }
                 }
             }
-        current = card;
-        cardpile.add(current);
+            current = card;
+            cardpile.add(current);
+        }
         }
 
     public int findLoser(){
