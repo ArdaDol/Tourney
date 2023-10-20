@@ -51,7 +51,7 @@ public class MainUnitTest {
 
         tourney.findLoser();
 
-        assertEquals( tourney.findLoser(), 1);
+        assertEquals( tourney.findLoser(), 0);
 
 
 

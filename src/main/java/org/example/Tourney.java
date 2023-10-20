@@ -202,9 +202,19 @@ public class Tourney {
 
         for(int i=0;i<indexs.length;i++){
             if(indexs[i]!=0){
-                loser = i+1;
+                loser = i;
             }
         }
+
+        for(int i =0;i< indexs.length;i++){
+
+            if(indexs[i]!=0){
+                if(cardpile.get(i).getValue()<cardpile.get(loser).getValue()){
+                    loser = i;
+                }
+            }
+        }
+
         return loser;
 
 
