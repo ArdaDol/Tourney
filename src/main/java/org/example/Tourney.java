@@ -104,8 +104,15 @@ public class Tourney {
         return false;
     }
 
-    public static boolean hasSpecial(Player p) {
-        // TODO Auto-generated method stub
+    private boolean hasSpecial(Player p) {
+        for(Card c:p.PlayerCards()) {
+
+            if(c.isSpecial()) {
+                return true;
+            }
+
+        }
+
 
 
 
