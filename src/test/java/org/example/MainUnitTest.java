@@ -22,7 +22,7 @@ public class MainUnitTest {
                 "Value: 1, Color: Test2, Damage: 0 \n" + "Value: 1, Color: Test3, Damage: 0 ";
 
 
-        assertEquals(player.showCards(), card);
+        assertEquals(player.hideCards(), card);
 
 
     }

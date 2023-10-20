@@ -120,9 +120,9 @@ public class Player {
         return c;
     }
 
-    public void hideCards() {
+    public String hideCards() {
 
-
+        return "___";
     }
 
 
