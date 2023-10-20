@@ -22,7 +22,7 @@ public class Player {
          * assigns name to the player
          */
 
-        //player object are created in uno class
+        //
 
         playercards = new ArrayList<Card>();
         loserPile = new ArrayList<Card>();
@@ -44,7 +44,7 @@ public class Player {
     public ArrayList<Card> PlayerCards(){
         /*
          * returns all the cards player has in hand as an ArrayList
-         * This is used mainly to check if player has any valid cards to play.(Check the Uno class)
+         * This is used mainly to check if player has any valid cards to play.
          */
 
         return playercards;
@@ -78,7 +78,46 @@ public class Player {
 
 
 
-        return "";
+        /*
+         * this is graphical representation of a card
+         * just to make cards look more look like cards
+         *
+         */
+
+        String[] card = {" ----- ","|     |","|     |"," ----- "};
+        String c = "";
+
+
+        for(int i=0;i<card.length;i++) {
+
+            for(int j=0;j<playercards.size();j++) {
+
+
+                if(i==1) {
+
+                    c = c +"| "+playercards.get(j).getColor()+" |"+" ";
+
+                }
+
+                else if(i==2) {
+
+                    c = c + "|  "+playercards.get(j).getValue()+"  |"+" ";
+                }
+
+                else {
+                    c = c + card[i]+" ";
+                }
+
+
+
+
+            }
+
+            c +="\n";
+
+        }
+
+        return c;
     }
 
     public void hideCards() {

@@ -10,12 +10,7 @@ public class Deck {
     private final String[] colors = {"Swrd","Arrw","Decp","Sorc", "Merl", "Appr", "Alch"};
     public Deck() {
 
-        /*
-         * The constructor creates a new deck
-         * There are 4 colors: red, blue, green, yellow
-         * Each suit has two of the same card except 0 (it only appears once in each suit).
-         * For example: green suit has two 1s but only 1 zero
-         */
+
 
 
         deck = new ArrayList<Card>();
