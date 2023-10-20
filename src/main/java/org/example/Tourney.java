@@ -76,12 +76,28 @@ public class Tourney {
 
 
     }
-    public static boolean isValidChoice(Player p,int choice) {
+    private boolean isValidChoice(Player p,int choice) {
 
         /*
          * checks if the user selection was a valid choice or not
          *
          */
+
+        if(choice <= p.PlayerCards().size()) {
+            //add for special
+            if(p.PlayerCards().get(choice).isExtraSpecial()){
+
+                for(int i =0; i<p.PlayerCards().size();i++){
+                    if(!p.PlayerCards().get(i).isExtraSpecial()){
+                        return false;
+                    }
+                }
+                return true;
+            }
+
+
+
+        }
 
         return false;
     }
