@@ -56,11 +56,14 @@ public class Tourney {
         }
 
     }
-    public void game( int rounds, int health) {
-
+    public void game( ) {
+        System.out.println("How many health?");
+        int health = choice.nextInt();
+        System.out.println("How many rounds?");
+        int rounds = choice.nextInt();
         System.out.println("How Many Players? (3-6)");
         pick = choice.nextInt();
-        while(pick<3 && pick<=6){
+        while(!(pick<3 || pick<=6)){
             System.out.println("How Many Players? (3-6)");
             pick = choice.nextInt();
         }
