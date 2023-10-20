@@ -55,28 +55,31 @@ public class Tourney {
 			/* this method simulates turns between the two players. when turn is even, player 1 plays and when
 			   turn is odd player 2 plays.
 			*/
-        playGame(new Player("Josh", 50));
+        playGame(new Player("Josh", 50), false);
 
 
 
 
     }
 
-    public void playGame(Player p) {
+    public void playGame(Player p, boolean con) {
 		/*	 this method takes player that is currently playing as an argument.
 			 this method contains entire process for the game.
 		*/
 
 
 
-            pick = choice.nextInt()-1;
-            isValidChoice(p, pick);
+            pick = choice.nextInt() - 1;
+            while (!isValidChoice(p, pick, con)) {
+
+            }
             current = p.throwCard(pick);
             cardpile.add(current);
 
 
+
     }
-    private boolean isValidChoice(Player p,int choice) {
+    public static boolean isValidChoice(Player p,int choice, boolean con) {
 
         /*
          * checks if the user selection was a valid choice or not
@@ -85,6 +88,7 @@ public class Tourney {
 
         if(choice <= p.PlayerCards().size()) {
             //add for special
+
             if(p.PlayerCards().get(choice).isExtraSpecial()){
 
                 for(int i =0; i<p.PlayerCards().size();i++){
@@ -94,6 +98,7 @@ public class Tourney {
                 }
                 return true;
             }
+
 
 
 
