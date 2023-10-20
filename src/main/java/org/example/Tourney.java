@@ -88,11 +88,18 @@ public class Tourney {
 
 
     }
-    public static boolean hasColor(Player p) {
+    private boolean hasColor(Player p) {
         /*
          * checks if player has card of the same color as the current card that is being played
          */
+        for(Card c:p.PlayerCards()) {
 
+            if(c.getColor().equals(current.getColor())) {
+                return true;
+            }
+
+
+        }
 
         return false;
     }
@@ -111,7 +118,7 @@ public class Tourney {
 
         return false;
     }
-    public  boolean isValidChoice(Player p,int choice, boolean con) {
+    private  boolean isValidChoice(Player p,int choice, boolean con) {
 
         /*
          * checks if the user selection was a valid choice or not
